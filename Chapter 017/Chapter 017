@@ -1,1 +1,111 @@
+# CHAPTER 17: Representation Learning and Generative Learning Using Autoencoders and GANs
+
+Chapter ini mencakup unsupervised learning techniques untuk discovering meaningful representations dan generating new data.
+
+## Autoencoders
+
+**Autoencoders** adalah neural networks yang compress input ke lower-dimensional representation (encoding) dan reconstruct original input dari representation (decoding).
+
+### Architecture:
+- **Encoder**: maps input ke latent code (bottleneck)
+- **Decoder**: maps latent code back ke original input space
+- Training: minimize reconstruction error
+
+### Undercomplete Autoencoders
+- Bottleneck dimensionality < input dimensionality
+- Force learning meaningful features
+- Equivalent ke dimensionality reduction
+- PCA adalah special case dari linear autoencoder
+
+## Stacked Autoencoders
+
+**Stacked autoencoders**: multiple autoencoders layered:
+- Trained greedily layer-by-layer
+- Each layer learns features dari previous layer's encoding
+- Dapat digunakan untuk unsupervised pretraining sebelum supervised fine-tuning
+- Historical importance (less used dengan modern deep learning)
+
+## Variants of Autoencoders
+
+### Convolutional Autoencoders
+- Use convolutions untuk image data
+- More parameter-efficient than dense autoencoders
+- Preserve spatial structure
+
+### Denoising Autoencoders
+- Trained pada noisy inputs dengan clean targets
+- Learning untuk remove noise
+- Robust representations
+
+### Sparse Autoencoders
+- Use L1 regularization untuk encourage sparse activations
+- Creating sparse representations
+- Interpretation easier
+
+### Variational Autoencoders (VAE)
+- Probabilistic autoencoders yang dapat generate new samples
+- **Encoder**: outputs parameters (mean dan variance) untuk distribution
+- **Bottleneck**: sample dari distribution
+- **Decoder**: reconstruct dari samples
+- Enables generation: can sample random latent vectors dan decode
+
+### Applications:
+- Dimensionality reduction
+- Denoising
+- Data generation
+- Anomaly detection (high reconstruction error = anomaly)
+
+## Generative Adversarial Networks (GANs)
+
+**GANs**: two-player game antara generator dan discriminator:
+- **Generator**: creates fake samples dari random noise
+- **Discriminator**: distinguishes real dari fake samples
+- Adversarial training: generator tries untuk fool discriminator
+
+### Training Dynamics:
+- Generator belajar untuk create increasingly realistic samples
+- Discriminator belajar untuk better detect fakes
+- Ideal outcome: generator generates indistinguishable dari real data
+
+### Challenges:
+- **Mode collapse**: generator hanya generates subset dari distribution
+- **Training instability**: discriminator dapat overwhelm generator atau vice versa
+- **Convergence difficult**: no clear loss untuk judging progress
+
+## Architecture Guidelines
+
+### Deep Convolutional GANs (DCGANs)
+- Architecture guidelines untuk stable CNN-based GANs
+- Convolutional layers instead of dense
+- Batch normalization untuk stability
+- Specific activation functions: ReLU untuk generator, LeakyReLU untuk discriminator
+
+## Advanced GAN Techniques
+
+### Progressive GANs
+- Gradually grow networks during training
+- Start dengan low resolution, progressively add layers
+- Improves training stability significantly
+
+### StyleGANs
+- Disentangle style dari content dalam generated images
+- Separate intermediate representation untuk style control
+- High-quality, controllable generation
+
+### Conditional GANs
+- Generate samples dari specific class/condition
+- Add condition information ke generator dan discriminator
+
+## Applications
+
+**GANs used for:**
+- Image generation (high-resolution, diverse)
+- Image-to-image translation (pix2pix, CycleGAN)
+- Style transfer
+- Super-resolution
+- Data augmentation
+
+## Kesimpulan
+
+Autoencoders dan GANs membuka possibilities untuk unsupervised learning dan generation. Autoencoders untuk representation learning dan GANs untuk realistic sample generation. Active research area dengan continuous improvements.
 
